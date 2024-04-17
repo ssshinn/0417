@@ -3,9 +3,9 @@ package com.example.a0417;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.DialogInterface;
-import android.widget.Button;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,18 +40,19 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("確定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                StringBuilder message = new StringBuilder("您選擇的餐點有：");
+                StringBuilder selectedItems = new StringBuilder("您點的餐點有：");
                 for (int i = 0; i < items.length; i++) {
                     if (checkedItems[i]) {
-                        message.append(items[i]).append(", ");
+                        selectedItems.append(items[i]).append(", ");
                     }
                 }
-                if (message.length() > 9) {
-                    message.delete(message.length() - 2, message.length()); // 刪除最後多餘的逗號和空格
+                if (selectedItems.length() > 9) {
+                    selectedItems.delete(selectedItems.length() - 2, selectedItems.length()); // 刪除最後多餘的逗號和空格
                 } else {
-                    message.append("無");
+                    selectedItems.append("無");
                 }
-                Toast.makeText(getApplicationContext(), message.toString(), Toast.LENGTH_SHORT).show();
+                TextView selectedItemsTextView = findViewById(R.id.textView2); // 找到用於顯示所選餐點的 TextView
+                selectedItemsTextView.setText(selectedItems.toString()); // 更新 TextView 的文本內容
             }
         });
 
